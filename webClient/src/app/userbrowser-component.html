@@ -1,0 +1,29 @@
+<!-- In this HTML file, an Angular Template should be placed that will work together with your Angular Component to make a dynamic, modern UI -->
+
+<div class="parent col-11" id="userbrowserPluginUI">
+    <div class="fixed-height-child include-in-calculation">
+        <button type="button" class="wide-button btn btn-default" (click)="submitSelectedUsers()" value="Send">
+            Submit Selected Users
+        </button>
+    </div>
+    <div class="fixed-height-child height-40" *ngIf="!showGrid && !viewConfig">
+        <div class="">
+        <p class="alert-danger">{{error_msg}}</p>
+        </div>
+    </div>
+    <div class="container variable-height-child" *ngIf="showGrid">
+        <zlux-grid [columns]="columnMetaData | zluxTableMetadataToColumns"
+        [rows]="rows"
+        [paginator]="true"
+        selectionMode="multiple"
+        selectionWay="checkbox"
+        [scrollableHorizontal]="true"
+        (selectionChange)="onTableSelectionChange($event)"
+        #grid></zlux-grid>
+    </div>
+    <div class="fixed-height-child include-in-calculation" style="height: 20px; order: 3"></div>
+</div>
+
+<div class="userbrowser-spinner-position">
+    <i class="fa fa-spinner fa-spin fa-3x" *ngIf="resultNotReady"></i>
+</div>
